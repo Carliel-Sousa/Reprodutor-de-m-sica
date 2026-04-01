@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reprodutor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link rel="stylesheet" href="music.css">
+</head>
+<body>    
+    <div class="music-player" id="player-container">
+
+        <div id="dynamic-bg"></div>
+
+        <button id="menu-btn">☰</button>
+    
+        <div class="playlist">
+                <ul id="music-list">
+                    <li>oi</li>
+                </ul>
+                
+        <div class="timer-section">
+            <p>Desligar em:</p>
+            <select id="sleep-timer">
+                <option value="0">Desativado</option>
+                <option value="15">15 minutos</option>
+                <option value="30">30 minutos</option>
+                <option value="60">60 minutos</option>
+            </select>
+            <span id="timer-display" style="display: block; font-size: 12px; color: var(--primary-color); margin-top: 5px;"></span>
+        </div>
+        <ul id="music-list"></ul>
+
+        <div class="stop-at-end-section" style="padding: 10px; text-align: center; border-bottom: 1px solid #333;">
+            <label style="cursor: pointer; font-size: 14px; color: #b3b3b3;">
+                <input type="checkbox" id="stop-at-end"> Parar após esta música
+            </label>
+        </div>
+
+        </div>
+
+        <button id="fullscreen-btn">⛶ Tela Cheia</button>
+        
+
+        <img id="cover-img" src="#" alt="Capa do Álbum">
+
+        <div class="progress-container">
+
+            <progress id="progress-bar" value="0" max="100"></progress>
+            
+            <div class="time-labels">
+                <span id="current-time">0:00</span>
+                <span id="duration-time">0:00</span>
+            </div>
+
+        </div>
+       
+        <div id="controls">
+            <button id="prev-btn"></button>
+            <button id="playPause-btn">
+                <i class="fas fa-play" id="play-icon"></i>
+            </button>
+            <button id="next-btn"></button>
+        </div>
+        
+        <audio id="audio-player"></audio>
+        
+    </div>
+</body>
+
+<script type="module" src="music.js"></script>
+
+</html>

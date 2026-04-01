@@ -1,0 +1,340 @@
+:root {
+    --primary-color: #1db954; /* Verde estilo Spotify */
+    --bg-dark: #121212;
+    --card-bg: #1e1e1e;
+    --text-color: #ffffff;
+    --transition: all 0.3s ease;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-color);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* --- PLAYLIST LATERAL --- */
+.playlist {
+    position: fixed;
+    left: -280px;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background: var(--card-bg);
+    box-shadow: 5px 0 15px rgba(0,0,0,0.5);
+    transition: var(--transition);
+    padding: 20px;
+    z-index: 10;
+}
+
+.playlist.open {
+    left: 0;
+}
+
+#menu-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: var(--primary-color);
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 11;
+    transition: var(--transition);
+}
+
+#menu-btn:hover {
+    transform: scale(1.1);
+}
+
+ul#music-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 60px;
+}
+
+ul#music-list li {
+    padding: 12px;
+    border-bottom: 1px solid #333;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+ul#music-list li:hover {
+    background: #282828;
+    color: var(--primary-color);
+}
+
+/* --- PLAYER CARD --- */
+.music-player {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    width: 320px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+#cover-img {
+    width: 250px;
+    height: 250px;
+    border-radius: 15px;
+    object-fit: cover;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+}
+
+.timer-section {
+    padding: 15px;
+    border-bottom: 1px solid #333;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.timer-section p {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #b3b3b3;
+}
+
+#sleep-timer {
+    background: #282828;
+    color: white;
+    border: 1px solid var(--primary-color);
+    padding: 5px;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+}
+
+/* --- BARRA DE PROGRESSO CUSTOMIZADA --- */
+.progress-container {
+    margin: 20px 0;
+}
+
+progress {
+    width: 100%;
+    height: 6px;
+    appearance: none;
+    cursor: pointer;
+}
+
+progress::-webkit-progress-bar {
+    background-color: #333;
+    border-radius: 10px;
+}
+
+progress::-webkit-progress-value {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
+.time-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #b3b3b3;
+    margin-top: 5px;
+}
+
+/* --- CONTROLES --- */
+#controls {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10px;
+    justify-content: center; /* Centraliza o grupo de botões */
+    gap: 30px;               /* Cria um espaço de 30px entre cada botão */
+    margin-top: 25px;        /* Afasta os botões da barra de progresso */
+}
+
+#controls button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+#controls button:hover {
+    color: var(--primary-color);
+    transform: scale(1.2);
+}
+
+#playPause-btn {
+    font-size: 40px !important;
+    background: var(--primary-color) !important;
+    border-radius: 50%;
+    width: 65px;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;          /* Adiciona um espaço extra apenas nas laterais do play */
+}
+
+#playPause-btn:hover {
+    background: #1ed760 !important;
+}
+
+#playPause-btn {
+    /* ... seus estilos anteriores (background, border-radius, width, height) ... */
+    
+    /* ADICIONE ISTO PARA CENTRALIZAR O ÍCONE */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* AJUSTE O TAMANHO DO ÍCONE */
+    font-size: 24px; /* Aumente ou diminua conforme o gosto */
+    color: white;
+    
+    /* Remove qualquer padding que o botão possa ter herdado */
+    padding: 0; 
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+#playPause-btn:hover {
+    background-color: #1ed760; /* Verde mais claro no hover */
+    transform: scale(1.05);
+}
+
+/* Garante que o ícone não tenha margens próprias */
+#playPause-btn i {
+    margin: 0;
+}
+
+/* Ícones para botões Prev e Next via texto se você não tiver imagens */
+#prev-btn::before { content: "⏮"; }
+#next-btn::before { content: "⏭"; }
+
+/* Efeito de fundo expandido */
+.music-player.fullscreen {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle, #282828 0%, #121212 100%);
+}
+
+.music-player.fullscreen #cover-img {
+    width: 45vh; /* Aumenta a capa baseada na altura da tela */
+    height: 45vh;
+}
+
+/* Botão para ativar a tela cheia */
+#fullscreen-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: 1px solid #555;
+    color: white;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+
+#fullscreen-btn:hover {
+    opacity: 1;
+    background: rgba(255,255,255,0.1);
+}
+/* Quando a classe .fullscreen for aplicada via JS */
+.music-player.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centraliza verticalmente */
+    align-items: center;     /* Centraliza horizontalmente */
+    border-radius: 0;
+    z-index: 9999;
+}
+
+/* Garante que a capa não fique gigante ou desalinhada */
+.music-player.fullscreen #cover-img {
+    max-height: 50vh; /* Ocupa metade da altura da tela */
+    width: auto;      /* Mantém a proporção */
+    margin: 20px 0;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+}
+
+/* Container da barra: em modo normal tem largura total do card */
+.progress-container {
+    width: 100%; 
+    margin: 20px 0;
+}
+
+/* Ajuste específico para o modo Tela Cheia */
+.music-player.fullscreen .progress-container {
+    width: 80%;       /* Ocupa 80% da largura da tela */
+    max-width: 600px; /* Mas não deixa ficar exageradamente gigante em monitores UltraWide */
+}
+
+/* Faz a barra de progresso ocupar 100% do seu container */
+progress {
+    width: 100%;
+    height: 8px; /* Ficou um pouco mais grossa para facilitar o clique em telas grandes */
+    appearance: none;
+    cursor: pointer;
+}
+
+.music-player.fullscreen .time-labels {
+    font-size: 16px; /* Aumenta a letra do tempo no modo tela cheia */
+    margin-top: 10px;
+}
+
+/* Quando o navegador entra no modo fullscreen real (F11 / API) */
+#player-container:fullscreen {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent; /* Para aparecer o fundo dinâmico */
+}
+
+.music-player.fullscreen #controls {
+    gap: 60px;               /* Dobra o espaço entre botões no modo tela cheia */
+}
+
+
+/* Fundo dinâmico que ocupa a tela toda */
+#dynamic-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Fica atrás de tudo */
+    background-size: cover;
+    background-position: center;
+    filter: blur(80px) brightness(0.5); /* Desfoca e escurece a imagem */
+    transition: background-image 1s ease-in-out; /* Transição suave ao mudar de música */
+}
+
+/* Garante que o player em tela cheia seja transparente para ver o fundo */
+.music-player.fullscreen {
+    background: transparent !important;
+}
