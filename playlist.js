@@ -3,7 +3,7 @@ export const minhasMusicas = [
     {
         titulo: "titulo: Sempre Que Me Olhares",
         artista: "Americas", // Adicione esta linha
-        url: "Media/Musicas/titulo: Sempre Que Me Olhares.mp3", // Use o novo nome simples aqui
+        url: "Media/Musicas/titulo: sempre-que-me-olhares.mp3", // Use o novo nome simples aqui
         capa: "Media/Capas/capa1.jpg"
     },
     {
