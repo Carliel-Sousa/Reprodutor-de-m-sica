@@ -1,6 +1,10 @@
 import { minhasMusicas } from './playlist.js';
 
+let musicaIndex = 0;
+
 // --- SELETORES DE ELEMENTOS ---
+const volumeSlider = document.getElementById('volume-slider');
+const volumeIcon = document.getElementById('volume-icon');
 const musicList = document.getElementById('music-list');
 const playlistDiv = document.querySelector('.playlist');
 const menuBtn = document.getElementById('menu-btn');
@@ -50,20 +54,20 @@ function atualizarVisualBotao() {
 }
 
 function tocarMusicaAtual() {
-    const musica = minhasMusicas[indiceAtual];
-    if (musica) {
-        audioPlayer.src = musica.url;
-        coverImg.src = musica.capa;
-        
-        // Atualiza o fundo dinâmico se ele existir
-        if (dynamicBg) {
-            dynamicBg.style.backgroundImage = `url(${musica.capa})`;
-        }
+    const musica = minhasMusicas[musicaIndex];
+    
+    // Atualiza o áudio e a capa
+    audioPlayer.src = musica.url;
+    if (coverImg) coverImg.src = musica.capa;
 
-        audioPlayer.play()
-            .then(() => atualizarVisualBotao())
-            .catch(err => console.log("Erro ao reproduzir:", err));
-    }
+    // Atualiza os textos
+    const txtTitulo = document.getElementById('titulo-musica');
+    const txtArtista = document.getElementById('artista-musica');
+
+    if (txtTitulo) txtTitulo.innerText = musica.titulo;
+    if (txtArtista) txtArtista.innerText = musica.artista || "Artista Desconhecido";
+
+    audioPlayer.play();
 }
 
 // Evento de clique no botão Play/Pause
@@ -82,14 +86,34 @@ playPauseBtn.addEventListener('click', () => {
 
 // Botão Próximo
 nextBtn.addEventListener('click', () => {
-    indiceAtual = (indiceAtual + 1) % minhasMusicas.length;
+    indiceAtual = (musicaIndex + 1) % minhasMusicas.length;
     tocarMusicaAtual();
 });
 
 // Botão Anterior
+// Botão Anterior (Back)
 prevBtn.addEventListener('click', () => {
-    indiceAtual = (indiceAtual - 1 + minhasMusicas.length) % minhasMusicas.length;
+    // 1. Diminui o índice
+    musicaIndex--;
+
+    // 2. Se o índice ficar menor que 0, ele pula para a ÚLTIMA música da lista
+    if (musicaIndex < 0) {
+        musicaIndex = minhasMusicas.length - 1;
+    }
+
+    // 3. Toca a música e atualiza o visual
     tocarMusicaAtual();
+    
+    // Se você tiver a função de atualizar o ícone do play, chame-a aqui:
+    if (typeof atualizarVisualBotao === "function") {
+        atualizarVisualBotao();
+    }
+});
+
+nextBtn.addEventListener('click', () => {
+    musicaIndex = (musicaIndex + 1) % minhasMusicas.length;
+    tocarMusicaAtual();
+    atualizarVisualBotao(); // Garante que o ícone mude para "Pause" ao pular
 });
 
 // Tocar próxima automaticamente ao acabar
@@ -206,6 +230,7 @@ sleepTimerSelect.addEventListener('change', () => {
     }
 });
 
+
 // EVENTO: Quando a música atual terminar
 audioPlayer.addEventListener('ended', () => {
     // 1. Verifica se a função "Parar após esta música" está DESATIVADA
@@ -219,5 +244,42 @@ audioPlayer.addEventListener('ended', () => {
         // Se estiver no modo normal, pula para a próxima
         console.log("Música encerrada. Passando para a próxima...");
         nextBtn.click(); // Chama o evento do botão Próximo que já criamos
+    }
+});
+
+// Controla o volume conforme o usuário arrasta a barra
+volumeSlider.addEventListener('input', (e) => {
+    const valorVolume = e.target.value;
+    audioPlayer.volume = valorVolume; // O áudio do HTML aceita valores de 0 a 1
+
+    // Troca o ícone dinamicamente dependendo da altura do som
+    if (valorVolume == 0) {
+        volumeIcon.className = 'fas fa-volume-mute';
+    } else if (valorVolume < 0.5) {
+        volumeIcon.className = 'fas fa-volume-down';
+    } else {
+        volumeIcon.className = 'fas fa-volume-up';
+    }
+});
+
+// Clique no ícone para Mutar / Desmutar rapidamente
+let volumeAnterior = 1;
+volumeIcon.addEventListener('click', () => {
+    if (audioPlayer.volume > 0) {
+        volumeAnterior = audioPlayer.volume; // Salva o volume atual
+        audioPlayer.volume = 0;
+        volumeSlider.value = 0;
+        volumeIcon.className = 'fas fa-volume-mute';
+    } else {
+        audioPlayer.volume = volumeAnterior; // Restaura o volume anterior
+        volumeSlider.value = volumeAnterior;
+        volumeIcon.className = volumeAnterior < 0.5 ? 'fas fa-volume-down' : 'fas fa-volume-up';
+    }
+});
+
+// Atalhos do teclado para o Player
+document.addEventListener('keydown', (e) => {
+    if (e.key.toLowerCase() === 'm') {
+        volumeIcon.click(); // Simula o clique no botão de mutar
     }
 });

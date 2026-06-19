@@ -146,6 +146,69 @@ progress::-webkit-progress-value {
     margin-top: 5px;
 }
 
+.volume-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+    width: 100%;
+    max-width: 200px; /* Limita o tamanho da barra */
+}
+
+/* 1. Estilo padrão para telas grandes (PC e Notebook) */
+.volume-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+    width: 100%;
+    max-width: 200px;
+}
+
+/* 2. A MÁGICA: Se a tela for menor que 768px (tamanho de celulares e tablets), esconde o volume! */
+@media (max-width: 768px) {
+    .volume-container {
+        display: none !important; /* Some com a barra inteira no celular */
+    }
+}
+
+#volume-icon {
+    color: #00ff88; /* Seu verde neon */
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+#volume-icon:hover {
+    transform: scale(1.1);
+}
+
+#volume-slider {
+    
+    width: 100%;
+    height: 6px;
+    background: #333;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Customização da "bolinha" do slider */
+#volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    background: #00ff88;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+#volume-slider::-webkit-slider-thumb:hover {
+    background: #fff;
+}
+
 /* --- CONTROLES --- */
 #controls {
     display: flex;
@@ -337,4 +400,115 @@ progress {
 /* Garante que o player em tela cheia seja transparente para ver o fundo */
 .music-player.fullscreen {
     background: transparent !important;
+}
+
+.info-musica {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#titulo-musica {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#artista-musica {
+    font-size: 1rem;
+    color: #00ff88; /* Aquele verde neon que você gosta */
+    opacity: 0.8;
+}
+
+#titulo-musica {
+    font-size: 1.2rem;    /* Diminuímos de 1.5 para 1.2 */
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #fff;
+    /* Evita que nomes gigantes quebrem o layout */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#artista-musica {
+    font-size: 0.9rem;    /* Texto do artista um pouco menor que o título */
+    color: #00ff88;       /* Mantendo seu verde neon */
+    opacity: 0.8;
+    margin-bottom: 20px;
+}
+
+.info-musica {
+    width: 100%;
+    padding: 0 10px;      /* Espaço apenas nas laterais */
+    box-sizing: border-box; /* Garante que o padding não aumente o tamanho da div */
+}
+
+.container-identificacao {
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+    box-sizing: border-box; /* Fundamental para o padding não "empurrar" a div para fora */
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* Espaço entre o título e o artista */
+}
+
+#titulo-musica {
+    font-size: 1.1rem; /* Tamanho confortável, nem gigante, nem minúsculo */
+    color: #fff;
+    margin: 0;
+    word-wrap: break-word; /* Se o nome for gigante, ele pula de linha */
+    line-height: 1.2;      /* Espaçamento entre linhas caso quebre */
+}
+
+#artista-musica {
+    font-size: 0.85rem;
+    color: #00ff88; 
+    margin: 0;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+.marquee-container {
+    width: 100%;
+    overflow: hidden; /* Esconde o texto que sai da borda */
+    white-space: nowrap;
+    background: rgba(0, 0, 0, 0.2); /* Opcional: um fundo sutil */
+    padding: 10px 0;
+    border-radius: 5px;
+}
+
+#info-animada {
+    display: inline-block;
+    padding-left: 100%; /* Começa fora da tela à direita */
+    font-size: 1.5rem; /* Aumenta um pouco a letra para a tela cheia */
+    animation: rolar-texto 15s linear infinite;
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+:fullscreen .marquee-container, 
+:-webkit-full-screen .marquee-container {
+    width: 100vw;
+    
+    bottom: 10%; /* Posiciona o texto na parte inferior da tela cheia */
+}
+
+/* A mágica da animação */
+@keyframes rolar-texto {
+    0% { transform: translateX(0); }
+    50% {transform: translateX(-50%);}
+    100% { transform: translateX(-50%); }
+}
+
+#artista-musica {
+    color: #00ff88; /* Seu verde neon */
+    font-weight: bold;
+}
+
+.separador {
+    margin: 0 10px;
+    color: #888;
 }

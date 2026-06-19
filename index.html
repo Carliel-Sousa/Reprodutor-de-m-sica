@@ -44,7 +44,15 @@
         <button id="fullscreen-btn">⛶ Tela Cheia</button>
         
 
-        <img id="cover-img" src="#" alt="Capa do Álbum">
+        <img id="cover-img" src="Media/Capas/capa1.jpg" alt="Capa do Álbum">
+
+        <div class="marquee-container">
+            <div id="info-animada">
+                <span id="titulo-musica">Título da Música</span>
+                <span class="separador"> - </span>
+                <span id="artista-musica">Artista</span>
+            </div>
+        </div>
 
         <div class="progress-container">
 
@@ -55,6 +63,10 @@
                 <span id="duration-time">0:00</span>
             </div>
 
+        </div>
+
+        <div class="volume-container">
+            <i id="volume-icon" class="fas fa-volume-up"></i> <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="1">
         </div>
        
         <div id="controls">
