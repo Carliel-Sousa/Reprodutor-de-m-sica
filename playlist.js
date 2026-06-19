@@ -3,8 +3,8 @@ export const minhasMusicas = [
     {
         titulo: "Sempre Que Me Olhares",
         artista: "Americas", // Adicione esta linha
-        url: "media/musicas/sempre-que-me-olhares.mp3",
-        capa: "media/capas/capa1.jpg"
+        url: "Media/Musicas/sempre-que-me-olhares.mp3",
+        capa: "Media/Capas/capa1.jpg"
     },
     {
         titulo: "O Zelo da Tua Casa (Clip Oficial) - Americas _ Som do Reino   TOMATULUGAR(M4A_128K).mp3",
