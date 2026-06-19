@@ -20,7 +20,7 @@ export const minhasMusicas = [
     {
         titulo: "Ao Que Está Assentado Sobre o Trono",
         artista: "Americas / Som do Reino",
-        url: "Media/musicas/ao-que-esta-assentado.mp3",
+        url: "Media/usicas/ao-que-esta-assentado.mp3",
         capa: "Media/capas/capa1.jpg"
     },
     {
