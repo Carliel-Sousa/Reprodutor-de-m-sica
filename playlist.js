@@ -1,7 +1,7 @@
 // Este é o seu novo "Banco de Dados" manual
 export const minhasMusicas = [
     {
-        titulo: "titulo:Sempre Que Me Olhares",
+        titulo: "Sempre Que Me Olhares",
         artista: "Americas", // Adicione esta linha
         url: "media/musicas/sempre-que-me-olhares.mp3",
         capa: "media/capas/capa1.jpg"
